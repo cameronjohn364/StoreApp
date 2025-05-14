@@ -14,6 +14,7 @@ import LoginPage from './Files/Pages/LoginPage'
 import RegisterPage from './Files/Pages/RegisterPage'
 import OTPconfirmPage from './Files/Pages/OTPconfirmPage'
 import StoresPage from "./Files/Pages/StoresPage"
+import CreateStorePage from './Files/Pages/CreateStorePage'
 
 
 const RouteWrapper = () => {
@@ -33,6 +34,7 @@ const RouteWrapper = () => {
       <Route path="/login" element={Logged ? <Navigate to="/home" replace/> : <LoginPage/>}/>
       <Route path="/register/otp-confirm" element={Logged ? <Navigate to="/home" replace/> : <OTPconfirmPage/>}/>
       <Route path="/stores" element={<StoresPage/>}/>
+      <Route path="/create-store" element={<CreateStorePage/>}/>
 
     </Routes>
 

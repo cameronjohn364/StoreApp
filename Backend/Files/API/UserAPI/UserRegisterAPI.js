@@ -79,9 +79,14 @@ router.post("/otp-confirm", async (req, res) => {
     {
       return res.status(404).json({code: 1, message: "User Doesn't found in TempUsers"})
     }
-    const plainUserObj = userObj.toObject();
+    // const plainUserObj = userObj.toObject();
     
-    if(plainUserObj.otp != otp)
+    // if(plainUserObj.otp != otp)
+    // {
+    //   return res.status().json({code: 2, message: "OTP Doesn't match"})
+    // }
+
+    if(userObj.otp != otp)
     {
       return res.status().json({code: 2, message: "OTP Doesn't match"})
     }
@@ -94,13 +99,18 @@ router.post("/otp-confirm", async (req, res) => {
       sameSite: "lax",
       maxAge: 1 * 60 * 60 * 1000
     })
-    plainUserObj.refreshToken = refreshToken;
+    // plainUserObj.refreshToken = refreshToken;
+    userObj.refreshToken = refreshToken;
 
-    delete plainUserObj.otp;
-    delete plainUserObj.token;
-    delete plainUserObj.createdAt;
+    // delete plainUserObj.otp;
+    // delete plainUserObj.token;
+    // delete plainUserObj.createdAt;
+    delete userObj.otp;
+    delete userObj.token;
+    delete userObj.createdAt;
 
-    await InsertOne(Users, plainUserObj);
+  //  await InsertOne(Users, plainUserObj); 
+  await InsertOne(Users, userObj);
 
     const filter2 = {token}
     await DeleteOne(TempUsers, filter2);

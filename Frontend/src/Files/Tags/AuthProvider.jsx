@@ -17,7 +17,7 @@ export const AuthProvider = ({children}) => {
 
   const onStart = async () => {
 
-    console.log("onStart Started");
+    console.log("========== onStart Started ==========");
 
     try
     {
@@ -58,7 +58,35 @@ export const AuthProvider = ({children}) => {
     }
     finally
     {
-      console.log("onStart Ended");
+      console.log("========== onStart Ended ==========");
+    }
+
+  }
+
+
+  const getUserData = async () => {
+
+    console.log("========== getUserData Started ==========");
+
+    try
+    {
+      const response = await axios.get("http://localhost:5000/api/user/onstart/get-user-data", {
+
+        headers: {"Content-Type": "application/json"},
+        withCredentials: true
+
+      })
+
+      const result = response.data;
+      console.log(result);
+    }
+    catch(err)
+    {
+      console.log("myErr getUserData :=== " + err);
+    }
+    finally
+    {
+      console.log("========== getUserData Ended ==========");
     }
 
   }
@@ -80,6 +108,12 @@ export const AuthProvider = ({children}) => {
     }
 
     onStart()
+
+    if(!sessionStorage.getItem("dataFetched"))
+    {
+      getUserData();
+      sessionStorage.setItem("dataFetched", "true");
+    }
 
   }, [])
 

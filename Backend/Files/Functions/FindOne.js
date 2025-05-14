@@ -4,7 +4,7 @@ const FindOne = async (collection, filter) => {
 
   try
   {
-    const result = await collection.findOne(filter);
+    const result = await collection.findOne(filter).lean();
 
     return result;
   }

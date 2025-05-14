@@ -27,6 +27,25 @@ router.get("/", VerifyToken, async (req, res) => {
 })
 
 
+router.get("/get-user-data", async (req, res) => {
+
+  console.log("========== get-user-data Started ==========");
+
+  try
+  {
+  }
+  catch(err)
+  {
+    console.log("myErr get-user-data :=== " + err);
+  }
+  finally
+  {
+    console.log("========== get-user-data Ended ==========");
+  }
+
+})
+
+
 
 
 module.exports = router;
